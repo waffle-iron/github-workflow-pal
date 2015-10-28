@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(function(message) {
   if (message.onPRPage) {
     var allChecked = function () {
-      return $('.buildo').length === $('.buildo:checked').length
+      return $('input.buildo:checkbox').length === $('.buildo:checkbox:checked').length
     };
 
     var hasLabel = function (label) {
@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener(function(message) {
 
     taskList.appendTo(wrapper);
     wrapper.prependTo($('.merge-message'));
-    $('<h4 class="status-heading"><span class="octicon octicon-list-unordered"></span>Have you checked the following?</h4>').prependTo($('.merge-message'));
+    $('<h4 class="status-heading"><span class="buildo octicon octicon-list-unordered"></span>Have you checked the following?</h4>').prependTo($('.merge-message'));
 
     $('.buildo').click(function(e) {
       mergeButton.prop('disabled', !allChecked());

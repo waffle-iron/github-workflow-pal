@@ -1,9 +1,9 @@
-input.buildo {
+input[type='checkbox'].buildo {
   cursor: pointer;
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
 }
 
-span.octicon {
+span.buildo.octicon {
   margin-right: 4px;
 }

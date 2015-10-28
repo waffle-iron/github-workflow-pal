@@ -1,0 +1,9 @@
+input.buildo {
+  cursor: pointer;
+  margin: 0 0.35em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+span.octicon {
+  margin-right: 4px;
+}

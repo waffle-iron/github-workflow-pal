@@ -16,7 +16,8 @@ chrome.runtime.onMessage.addListener(function(message) {
 
     mergeButton.prop('disabled', true);
 
-    var wrapper = $('<div class="comment-body markdown-body markdown-format js-comment-body">');
+    var wrapper = $('<div class="buildo-gh-workflow"></div>');
+    var listWrapper = $('<div class="comment-body markdown-body markdown-format js-comment-body">');
     var taskList = $('<ul class="task-list">');
     if (hasLabel('specs')) {
       checkbox("Requirements are in sync").appendTo(taskList);
@@ -24,9 +25,12 @@ chrome.runtime.onMessage.addListener(function(message) {
     }
     checkbox("Test plan checked").appendTo(taskList);
 
-    taskList.appendTo(wrapper);
+    taskList.appendTo(listWrapper);
+    $('<h4 class="status-heading"><span class="buildo octicon octicon-list-unordered"></span>Have you checked the following?</h4>').appendTo(wrapper);
+    listWrapper.appendTo(wrapper);
+
+    $('.merge-message div.buildo-gh-workflow').remove();
     wrapper.prependTo($('.merge-message'));
-    $('<h4 class="status-heading"><span class="buildo octicon octicon-list-unordered"></span>Have you checked the following?</h4>').prependTo($('.merge-message'));
 
     $('.buildo').click(function(e) {
       mergeButton.prop('disabled', !allChecked());

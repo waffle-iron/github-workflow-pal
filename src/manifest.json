@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "buildo's GitHub workflow extension",
+  "version": "dev-version",
+  "background": {
+    "scripts": [
+      "background/background.bundle.js"
+    ],
+    "persisten": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup/index.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/buildo/*"
+      ],
+      "css": [
+        "./plugin/styles/plugin.css"
+      ],
+      "js": [
+        "./plugin/plugin.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "https://github.com/buildo/*/pulls/*"
+  ]
+}

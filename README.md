@@ -4,7 +4,7 @@ A friendly chrome extension that helps you following the buildo's GitHub workflo
 
 
 ### Install
-- Download [here](https://github.com/buildo/github-workflow-pal/releases/download/v0.2.0/buildo-gh-workflow.crx)
+- Download [here](https://github.com/buildo/github-workflow-pal/releases/download/v0.2.0/github-workflow-pal.crx)
 - Navigate to `chrome://extensions`
 - Drag & Drop the extension on the extension list
 

@@ -11,10 +11,14 @@ export default function addNewBugButton() {
     <a href="${newIssueURL}" class="btn btn-secondary right buildo-bug-button" role="button" tabindex="0" data-hotkey="q b">New bug</a>
   `);
   newBugButton.on('click', () => {
-    setTimeout(() => prefillIssueWithTemplate({
-      templateName: 'bug',
-      labels: ['bug']
-    }), 1000);
+    chrome.runtime.onMessage.addListener((message) => {
+      if (message.onNewIssuePage) {
+        prefillIssueWithTemplate({
+          templateName: 'bug',
+          labels: ['bug']
+        });
+      }
+    });
   });
 
   $('.buildo-bug-button').remove();

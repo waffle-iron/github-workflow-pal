@@ -12,7 +12,7 @@ A friendly chrome extension that helps you following the buildo's GitHub workflo
 
 - **Merge button safe-guards**
 
-  ![screen shot 2015-10-28 at 12 58 18 pm](https://cloud.githubusercontent.com/assets/691940/10787819/b2738a22-7d73-11e5-9824-cf0777be7b1d.png)
+  ![](https://cloud.githubusercontent.com/assets/691940/10787819/b2738a22-7d73-11e5-9824-cf0777be7b1d.png)
 
     The merge button is enabled on PRs only after you explicitly declare to have checked a few conditions, namely:
     - **requirements** to be in sync with the specs (if applicable)
@@ -22,5 +22,7 @@ A friendly chrome extension that helps you following the buildo's GitHub workflo
     This purely serves as a reminder, and doesn't perform any further checks.
 
 - **'New buildo issue' button**
+
+  ![](https://cloud.githubusercontent.com/assets/691940/12094956/ff4cc034-b30b-11e5-940c-56cc3ea7e27c.png)
 
   Add a 'New buildo issue' button for quick creation of issues specific to buildo's workflow.

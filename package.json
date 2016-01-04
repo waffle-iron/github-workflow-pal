@@ -1,6 +1,6 @@
 {
   "name": "buildo-github-chrome-extension",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "src/plugin.js",
   "dependencies": {
@@ -46,6 +46,6 @@
     "preversion": "npm run lint && npm run test",
     "postversion": "npm shrinkwrap && mv npm-shrinkwrap.json npm-shrinkwrap-deploy.json && git add npm-shrinkwrap-deploy.json -f && npm shrinkwrap --dev && git add npm-shrinkwrap.json package.json -f && git commit -m \"shrinkwrap\""
   },
-  "author": "Andrea Ascari <dev.ascariandrea@gmail.com> (http://www.ascariandrea.com/)",
-  "license": "ISC"
+  "author": "buildo <we@buildo.io> (http://buildo.io)",
+  "license": "MIT"
 }

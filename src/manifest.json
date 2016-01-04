@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "buildo's GitHub workflow extension",
-  "version": "dev-version",
+  "version": "0.1.0",
   "background": {
     "scripts": [
       "background/background.bundle.js"

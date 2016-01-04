@@ -21,6 +21,6 @@ A friendly chrome extension that helps you following the buildo's GitHub workflo
 
     This purely serves as a reminder, and doesn't perform any further checks.
 
-- **'New bug' button**
+- **'New buildo issue' button**
 
-  Add a 'New bug' button for quick creation of issues of type bug.
+  Add a 'New buildo issue' button for quick creation of issues specific to buildo's workflow.

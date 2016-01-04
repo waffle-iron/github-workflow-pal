@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export function gatekeepMergeButton() {
+export default function gatekeepMergeButton() {
   const allChecked = function () {
     return $('input.buildo:checkbox').length === $('.buildo:checkbox:checked').length
   };

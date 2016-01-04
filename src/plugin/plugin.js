@@ -3,7 +3,7 @@ import '!file?name=_locales/en/messages.json!../_locales/en/messages.json';
 import '!file?name=plugin/styles/plugin.css!less!./styles/plugin.less';
 
 import gatekeepMergeButton from './gatekeepMergeButton';
-import addNewBugButton from './addNewBugButton';
+import addNewBuildoIssueButton from './addNewBuildoIssueButton';
 
 chrome.runtime.onMessage.addListener(function(message) {
 
@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(function(message) {
   }
 
   if (message.onIssuesPage) {
-    addNewBugButton();
+    addNewBuildoIssueButton();
   }
 
   return true;

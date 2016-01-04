@@ -8,7 +8,7 @@ export default function addNewBugButton() {
   `);
   newBugButton.on('click', () => {
     setTimeout(() => prefillIssueWithTemplate({
-      templateName: 'template',
+      templateName: 'bug',
       labels: ['bug']
     }), 1000);
   });

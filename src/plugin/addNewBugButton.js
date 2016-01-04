@@ -1,6 +1,5 @@
 import $ from 'jquery';
-import template from 'raw!./templates/bug.md';
-import enableActivePlaceholders from './enableActivePlaceholders';
+import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
 $.fn.selectRange = function(start, end) {
   return this.each(function() {
@@ -34,26 +33,14 @@ $.fn.getCursorPosition = function() {
 
 export default function addNewBugButton() {
 
-  const setLabel = (labelName) => {
-    const toggleLabelsMenu = () => $('.label-select-menu > .js-menu-target').click();
-    const selectLabel = (name) => $(`.select-menu-item:contains(${name})`).click();
-    toggleLabelsMenu();
-    selectLabel(labelName);
-    toggleLabelsMenu();
-  };
-
   const newBugButton = $(`
     <a href="/buildo/infra/issues/new" class="btn btn-secondary right buildo-bug-button" role="button" tabindex="0" data-hotkey="q b">New bug</a>
   `);
   newBugButton.on('click', () => {
-    setTimeout(() => {
-      const issueTitle = $('.composer [name="issue[title]"]');
-      const issueBody = $('.composer [name="issue[body]"]');
-      issueBody.val(template)
-      setLabel('bug');
-      enableActivePlaceholders(issueBody);
-      issueTitle.click();
-    }, 1000);
+    setTimeout(() => prefillIssueWithTemplate({
+      templateName: 'template',
+      labels: ['bug']
+    }), 1000);
   });
 
   const newIssueButton = $('a.btn-primary:contains(New issue)');

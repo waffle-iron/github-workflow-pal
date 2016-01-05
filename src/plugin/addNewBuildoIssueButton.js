@@ -8,8 +8,11 @@ export default function addNewBuildoIssueButton() {
 
   const newIssueURL = newIssueButton.prop('href');
 
+  const isSmall = newIssueButton.hasClass('btn-sm');
+  const smallClass = isSmall ? 'btn-sm' : '';
+
   const newBuildoIssueButton = $(`
-    <button class="btn btn-primary select-menu-button js-menu-target buildo-new-issue-button right" type="button" aria-haspopup="true">
+    <button class="btn btn-primary ${smallClass} select-menu-button js-menu-target buildo-new-issue-button right" type="button" aria-haspopup="true">
       New buildo issue
     </button>
   `);
@@ -49,7 +52,11 @@ export default function addNewBuildoIssueButton() {
   `);
 
   $('.buildo-new-issue-button').remove();
-  newBuildoIssueButton.insertBefore(newIssueButton);
+  if (isSmall) {
+    newBuildoIssueButton.insertAfter(newIssueButton);
+  } else {
+    newBuildoIssueButton.insertBefore(newIssueButton);
+  }
   newIssueOptions.insertAfter(newBuildoIssueButton);
 
   newBuildoIssueButton.on('click', () => newIssueOptions.toggle());

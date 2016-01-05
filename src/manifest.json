@@ -20,7 +20,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/buildo/*"
+        "https://github.com/buildo/*",
+        "https://github.omnilab.our.buildo.io/*"
       ],
       "css": [
         "./plugin/styles/plugin.css"

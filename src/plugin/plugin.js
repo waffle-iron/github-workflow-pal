@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(function(message) {
   }
 
   if (message.onIssuesPage) {
-    addNewBuildoIssueButton();
+    addNewBuildoIssueButton({ oldInterface: message.oldInterface });
   }
 
   return true;

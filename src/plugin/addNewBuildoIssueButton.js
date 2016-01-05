@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
-export default function addNewBuildoIssueButton() {
+export default function addNewBuildoIssueButton({ oldInterface }) {
 
   const newIssueButton = $('a.btn:contains(New issue)');
   newIssueButton.removeClass('btn-primary');
@@ -58,6 +58,10 @@ export default function addNewBuildoIssueButton() {
     newBuildoIssueButton.insertBefore(newIssueButton);
   }
   newIssueOptions.insertAfter(newBuildoIssueButton);
+
+  if (oldInterface) {
+    $('.right[role=search]').find('input[type=text]').css('width', '222px');
+  }
 
   newBuildoIssueButton.on('click', () => newIssueOptions.toggle());
 

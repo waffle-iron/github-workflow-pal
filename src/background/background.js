@@ -9,7 +9,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (tab.url.match(issuesPageRegex)) {
     chrome.tabs.sendMessage(tab.id, { onIssuesPage: true, oldInterface });
   }
-  if (tab.url.match(newIssuePageRegex)) {
+  if (changeInfo.status == 'complete' && tab.url.match(newIssuePageRegex)) {
     chrome.tabs.sendMessage(tab.id, { onNewIssuePage: true, oldInterface });
   }
   if (changeInfo.status == 'complete' && tab.url.match(pullRequestPageRegex)) {

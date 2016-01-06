@@ -67,9 +67,10 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
 
   issueTypes.forEach(({ className, templateName, labels }) => {
     $(`.${className}`).on('click', () => {
-      chrome.runtime.onMessage.addListener((message) => {
+      chrome.runtime.onMessage.addListener(function listener (message) {
         if (message.onNewIssuePage) {
           prefillIssueWithTemplate({ templateName, labels });
+          chrome.runtime.onMessage.removeListener(listener);
         }
       });
     });

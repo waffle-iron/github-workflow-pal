@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/plugin.js",
   "dependencies": {
+    "arrive": "^2.3.0",
     "jquery": "^1.11.3",
     "lodash": "^3.10.1"
   },
@@ -26,6 +27,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "html-webpack-plugin": "^1.6.1",
+    "imports-loader": "^0.6.5",
     "json-loader": "^0.5.3",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",

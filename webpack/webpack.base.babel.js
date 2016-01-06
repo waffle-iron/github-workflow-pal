@@ -51,6 +51,10 @@ module.exports = {
       {
         test: paths.THEME_VARIABLES,
         loader: 'sass-variables'
+      },
+      {
+        test: require.resolve('arrive'),
+        loader: 'imports?this=>window'
       }
     ]
   }

@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import enableActivePlaceholders from './enableActivePlaceholders';
+require('arrive');
 
 export default function prefillIssueWithTemplate({ templateName, labels }) {
 
@@ -13,8 +14,14 @@ export default function prefillIssueWithTemplate({ templateName, labels }) {
       names.forEach(name => $(`.select-menu-item:contains(${name})`).click());
     };
     toggleLabelsMenu();
-    selectLabels(labelNames);
-    toggleLabelsMenu();
+    document.arrive('.label-select-menu.active', {
+      fireOnAttributesModification: true,
+      onceOnly: true,
+      existing: true
+    }, () => {
+      selectLabels(labelNames);
+      toggleLabelsMenu();
+    });
   };
 
   issueBody.prop('placeholder', 'Loading issue template...');

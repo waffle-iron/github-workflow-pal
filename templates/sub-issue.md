@@ -1,4 +1,4 @@
-&larr; #$parentIssueNo
+← #$parentIssueNo
 
 ## Requirements
 [requirements]

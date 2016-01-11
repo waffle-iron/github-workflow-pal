@@ -23,9 +23,9 @@ export default function addSubIssueButton() {
   sideBar.append(newSubIssueButton);
 
   const labels = $('.labels.css-truncate > a')
-    .map((_, x) => x.innerHTML)
-    .filter(x => x !== 'macro')
-    .toArray();
+    .toArray()
+    .map(x => x.innerHTML)
+    .filter(x => x !== 'macro');
 
   const milestone = $('.milestone-name').prop('title');
 

@@ -5,17 +5,31 @@ import $ from 'jquery';
 
 import gatekeepMergeButton from './gatekeepMergeButton';
 import addNewBuildoIssueButton from './addNewBuildoIssueButton';
+import addSubIssueButton from './addSubIssueButton';
 
-chrome.runtime.onMessage.addListener(function(message) {
+chrome.runtime.onMessage.addListener(function({
+  onIssuesPage,
+  onIssuePage,
+  onPRPage,
+  oldInterface
+}) {
 
   const isGithubLoading = !!$('.is-context-loading').length;
 
-  if (message.onPRPage && !isGithubLoading) {
+  if (isGithubLoading) {
+    return;
+  }
+
+  if (onPRPage) {
     gatekeepMergeButton();
   }
 
-  if (message.onIssuesPage && !isGithubLoading) {
-    addNewBuildoIssueButton({ oldInterface: message.oldInterface });
+  if (onIssuesPage) {
+    addNewBuildoIssueButton({ oldInterface });
+  }
+
+  if (onIssuePage) {
+    addSubIssueButton();
   }
 
   return true;

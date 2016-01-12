@@ -1,8 +1,11 @@
-# how to reproduce
-- [step 1]
+## description
+[describe the buggy behavior]
 
-# specs
+## how to reproduce
+- [optional: describe steps to reproduce bug]
+
+## specs
 [optional: describe a possible fix for this bug, if not obvious]
 
-# misc
+## misc
 [optional: other useful info]

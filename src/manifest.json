@@ -37,5 +37,6 @@
     "tabs",
     "webNavigation",
     "https://github.com/buildo/*/pulls/*"
-  ]
+  ],
+  "update_url": "https://raw.githubusercontent.com/buildo/github-workflow-pal/master/package/update.xml"
 }

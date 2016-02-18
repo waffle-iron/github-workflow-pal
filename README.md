@@ -26,6 +26,6 @@ A friendly chrome extension that helps you following the buildo's GitHub workflo
 
 - **'New buildo issue' button**
 
-  ![](https://cloud.githubusercontent.com/assets/691940/12094956/ff4cc034-b30b-11e5-940c-56cc3ea7e27c.png)
-
   Add a 'New buildo issue' button for quick creation of issues specific to buildo's workflow.
+
+  ![](http://g.recordit.co/tSDUdcagnl.gif)

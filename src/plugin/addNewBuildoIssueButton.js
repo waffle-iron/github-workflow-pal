@@ -84,6 +84,13 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
 
   newBuildoIssueButton.on('click', () => newIssueOptions.toggle());
 
+  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey }) => {
+    if (keyCode === 67 && !shiftKey) {
+      bindIssueTemplates(issueTypes[2])();
+      $(document.body).off('keydown.goToFeature');
+    }
+  })
+
   issueTypes.forEach( issue => $(`.${issue.className}`).on('click', bindIssueTemplates(issue)));
 
 }

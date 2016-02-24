@@ -39,7 +39,7 @@
     "webpack-dev-server": "^1.12.0"
   },
   "scripts": {
-    "start": "rm -rf dev/ && webpack-dev-server --config webpack/webpack.dev.config.babel.js --progress --hot --inline",
+    "start": "rm -rf build/ && webpack --config webpack/webpack.build.config.babel.js --progress --inline --watch",
     "build": "rm -rf build/ && webpack --config webpack/webpack.build.config.babel.js --progress",
     "package": "babel-node package.js",
     "release": "babel-node release.js",

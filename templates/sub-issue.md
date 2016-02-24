@@ -1,7 +1,7 @@
 ← #$parentIssueNo
 
 ## Requirements
-[requirements]
+{requirements}
 
 ## Specs
-[specs]
+{specs}

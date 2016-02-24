@@ -37,8 +37,8 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
     className: 'buildo-new-feature-button',
     templateName: 'feature',
     titleTemplate: {
-      title: '[_topic_] _title',
-      selection: '_topic_'
+      title: '[{topic}] {title}',
+      selection: '{topic}'
     },
     labels: []
   }];

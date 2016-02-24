@@ -76,7 +76,7 @@ export default function prefillIssueWithTemplate({ templateName, titleTemplate =
 
     setLabels(labels);
     setMilestone(milestone)
-    enableActivePlaceholders(issueBody);
+    enableActivePlaceholders(issueBody, issueTitle);
     issueTitle.click();
     setTitle(titleTemplate);
 

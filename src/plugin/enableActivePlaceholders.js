@@ -30,21 +30,21 @@ $.fn.getCursorPosition = function() {
   return pos;
 };
 
-export default function enableActivePlaceholders(issueBody) {
-  issueBody.click(function() {
+export default function enableActivePlaceholders(...elements) {
+  elements.forEach(el => el.click(function() {
     if (window.getSelection().toString().length) {
       return;
     }
-    const position = issueBody.getCursorPosition();
-    const ib = issueBody.val();
+    const position = el.getCursorPosition();
+    const ib = el.val();
     const beforeCursor = ib.substr(0, position);
     const afterCursor = ib.substr(position);
-    const afterStartBracket = beforeCursor.match(/\[[^\]]*$/);
-    const beforeEndBracket = afterCursor.match(/^[^\[]*\]/);
+    const afterStartBracket = beforeCursor.match(/\{[^\}]*$/);
+    const beforeEndBracket = afterCursor.match(/^[^\{]*\}/);
     if (afterStartBracket && beforeEndBracket) {
       const selectFrom = position - afterStartBracket[0].length;
       const selectTo = position + beforeEndBracket[0].length;
-      issueBody.selectRange(selectFrom, selectTo);
+      el.selectRange(selectFrom, selectTo);
     }
-  });
+  }));
 }

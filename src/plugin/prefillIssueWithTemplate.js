@@ -2,7 +2,17 @@ import $ from 'jquery';
 import enableActivePlaceholders from './enableActivePlaceholders';
 require('arrive');
 
-export default function prefillIssueWithTemplate({ templateName, templateVariables = {}, labels = [], milestone }) {
+const subStringRange = (string, subString) => {
+  const startIndex = string.search(subString);
+  if (startIndex === -1) {
+    return [0, 0];
+  }
+  const endIndex = startIndex + subString.length;
+  return [startIndex, endIndex];
+}
+
+
+export default function prefillIssueWithTemplate({ templateName, titleTemplate = {}, templateVariables = {}, labels = [], milestone }) {
 
   document.arrive('.composer', {
     fireOnAttributesModification: true,
@@ -46,6 +56,12 @@ export default function prefillIssueWithTemplate({ templateName, templateVariabl
       });
     }
 
+    const setTitle = ({ title = '', selection = '' }) => {
+      const issueTitleDOMElem = issueTitle[0];
+      issueTitle.val(title);
+      issueTitleDOMElem.setSelectionRange(...subStringRange(title, selection));
+    }
+
     issueBody.prop('placeholder', 'Loading issue template...');
 
     $.get(`${templatesPath}/${templateName}.md`, (contents, status) => {
@@ -62,6 +78,7 @@ export default function prefillIssueWithTemplate({ templateName, templateVariabl
     setMilestone(milestone)
     enableActivePlaceholders(issueBody);
     issueTitle.click();
+    setTitle(titleTemplate);
 
   });
 

@@ -31,6 +31,16 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
     className: 'buildo-new-defect-button',
     templateName: 'defect',
     labels: ['defect']
+  }, {
+    title: 'New feature',
+    icon: 'paintcan',
+    className: 'buildo-new-feature-button',
+    templateName: 'feature',
+    titleTemplate: {
+      title: '[_topic_] _title',
+      selection: '_topic_'
+    },
+    labels: []
   }];
 
   const options = issueTypes.reduce((opts, { className, icon, title }) => `
@@ -65,11 +75,11 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
 
   newBuildoIssueButton.on('click', () => newIssueOptions.toggle());
 
-  issueTypes.forEach(({ className, templateName, labels }) => {
+  issueTypes.forEach(({ className, templateName, labels, titleTemplate }) => {
     $(`.${className}`).on('click', () => {
       chrome.runtime.onMessage.addListener(function listener (message) {
         if (message.onNewIssuePage) {
-          prefillIssueWithTemplate({ templateName, labels });
+          prefillIssueWithTemplate({ templateName, labels, titleTemplate });
           chrome.runtime.onMessage.removeListener(listener);
         }
       });

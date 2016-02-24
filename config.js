@@ -7,7 +7,7 @@ module.exports = {
     devTool: 'eval-source-map'
   },
   package: {
-    repo: 'buildo/infra/chrome-extensions/buildo-gh-workflow',
+    repo: 'buildo/github-workflow-pal',
     crxFileName: 'buildo-gh-workflow'
   }
 };

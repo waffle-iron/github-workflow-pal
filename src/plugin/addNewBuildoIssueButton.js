@@ -17,6 +17,15 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
     </button>
   `);
 
+  const bindIssueTemplates = ({ templateName, labels, titleTemplate }) => () => {
+    chrome.runtime.onMessage.addListener(function listener (message) {
+      if (message.onNewIssuePage) {
+        prefillIssueWithTemplate({ templateName, labels, titleTemplate });
+        chrome.runtime.onMessage.removeListener(listener);
+      }
+    });
+  };
+
   const optionsStyle = 'top: 34px; right: 0px';
 
   const issueTypes = [{
@@ -75,15 +84,6 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
 
   newBuildoIssueButton.on('click', () => newIssueOptions.toggle());
 
-  issueTypes.forEach(({ className, templateName, labels, titleTemplate }) => {
-    $(`.${className}`).on('click', () => {
-      chrome.runtime.onMessage.addListener(function listener (message) {
-        if (message.onNewIssuePage) {
-          prefillIssueWithTemplate({ templateName, labels, titleTemplate });
-          chrome.runtime.onMessage.removeListener(listener);
-        }
-      });
-    });
-  });
+  issueTypes.forEach( issue => $(`.${issue.className}`).on('click', bindIssueTemplates(issue)));
 
 }

@@ -32,7 +32,6 @@ switch(releaseType) {
 const newVersion = `${newMajor}.${newMinor}.${newPatch}`;
 console.log(`${version} -> ${newVersion}`);
 
-
 packingCrx(`${newVersion}`)
   .then(() =>
     execThen('git rev-parse --abbrev-ref HEAD')

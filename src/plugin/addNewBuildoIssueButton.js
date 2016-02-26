@@ -61,12 +61,13 @@ export default function addNewBuildoIssueButton() {
     </div>
   `);
 
-  $('.buildo-new-issue-button').remove(); // remove buildo-button in case it already exists
-  $('.buildo-new-issue-options').remove(); // remove buildo-button in case it already exists
-  newBuildoIssueButton.insertAfter(newIssueButton);
-  newIssueOptions.insertAfter(newBuildoIssueButton);
-
-  newIssueButton.remove(); // remove default GitHub button
+  if ($('.buildo-new-issue-button').length === 0) {
+    newBuildoIssueButton.insertAfter(newIssueButton);
+    newIssueOptions.insertAfter(newBuildoIssueButton);
+  }
+  if ($(newIssueButton).length > 0) {
+    newIssueButton.remove(); // remove default GitHub button
+  }
 
   $('.buildo-new-issue-button').on('click', e => {
     newIssueOptions.toggle();

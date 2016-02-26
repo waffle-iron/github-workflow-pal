@@ -10,8 +10,7 @@ import addSubIssueButton from './addSubIssueButton';
 chrome.runtime.onMessage.addListener(function({
   onIssuesPage,
   onIssuePage,
-  onPRPage,
-  oldInterface
+  onPRPage
 }) {
 
   const isGithubLoading = !!$('.is-context-loading').length;

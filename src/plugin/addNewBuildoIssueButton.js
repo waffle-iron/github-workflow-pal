@@ -2,8 +2,8 @@ import $ from 'jquery';
 import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
 export default function addNewBuildoIssueButton() {
-
-  const newIssueButton = $('a[href="/buildo/github-workflow-pal/issues/new"].btn:contains(New issue)');
+  const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
+  const newIssueButton = $(`a[href="${repoURL}/issues/new"].btn:contains(New issue)`);
 
   const newIssueURL = newIssueButton.prop('href');
 

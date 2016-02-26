@@ -11,8 +11,17 @@ const subStringRange = (string, subString) => {
   return [startIndex, endIndex];
 }
 
+function parseQuery() {
+  const queries = window.location.search.substr(1).split('&');
+  return queries.reduce((acc, query) => {
+    const key = decodeURIComponent(query.split('=')[0]);
+    const value = decodeURIComponent(query.split('=')[1]) || '';
+    return { ...acc, [key]: value };
+  }, {});
+}
 
-export default function prefillIssueWithTemplate({ templateName, titleTemplate = {}, templateVariables = {}, labels = [], milestone }) {
+
+export default function prefillIssueWithTemplate() {
 
   document.arrive('.composer', {
     fireOnAttributesModification: true,
@@ -27,19 +36,20 @@ export default function prefillIssueWithTemplate({ templateName, titleTemplate =
     const milestoneMenu = $('[aria-label="Set milestone"]');
 
     const setLabels = (labelNames) => {
-      const toggleLabelsMenu = () => labelsMenu.click();
-      const selectLabels = (names) => {
-        names.forEach(name => $(`.select-menu-item:contains(${name})`).click());
-      };
-      toggleLabelsMenu();
-      document.arrive('.label-select-menu.active', {
-        fireOnAttributesModification: true,
-        onceOnly: true,
-        existing: true
-      }, () => {
-        selectLabels(labelNames);
-        toggleLabelsMenu();
-      });
+      if (labelNames) {
+        const selectLabels = (names) => {
+          names.forEach(name => $(`.select-menu-item:contains(${name})`).click());
+        };
+        labelsMenu.show();
+        document.arrive('.label-select-menu.active', {
+          fireOnAttributesModification: true,
+          onceOnly: true,
+          existing: true
+        }, () => {
+          selectLabels(labelNames);
+          labelsMenu.hide();
+        });
+      }
     };
 
     const setMilestone = milestoneName => {
@@ -64,6 +74,8 @@ export default function prefillIssueWithTemplate({ templateName, titleTemplate =
 
     issueBody.prop('placeholder', 'Loading issue template...');
 
+    const { templateName, title, titleSelection, labels, templateVariables = {}, milestone } = parseQuery();
+
     $.get(`${templatesPath}/${templateName}.md`, (contents, status) => {
       if (status == 'success') {
         issueBody.prop('placeholder', 'Ignoring the issue template, aren\'t you?!');
@@ -78,7 +90,7 @@ export default function prefillIssueWithTemplate({ templateName, titleTemplate =
     setMilestone(milestone)
     enableActivePlaceholders(issueBody, issueTitle);
     issueTitle.click();
-    setTitle(titleTemplate);
+    setTitle({ title, titleSelection });
 
   });
 

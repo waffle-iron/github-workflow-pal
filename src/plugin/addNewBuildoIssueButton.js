@@ -1,11 +1,10 @@
 import $ from 'jquery';
-import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
 export default function addNewBuildoIssueButton() {
   const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
   const newIssueButton = $(`a[href="${repoURL}/issues/new"].btn:contains(New issue)`);
 
-  const newIssueURL = newIssueButton.prop('href');
+  const newIssueURL = `${repoURL}/issues/new`;
 
   const isSmall = newIssueButton.hasClass('btn-sm');
   const smallClass = isSmall ? 'btn-sm' : '';
@@ -16,15 +15,6 @@ export default function addNewBuildoIssueButton() {
     </button>
   `);
 
-  const bindIssueTemplates = ({ templateName, labels, titleTemplate }) => () => {
-    chrome.runtime.onMessage.addListener(function listener (message) {
-      if (message.onNewIssuePage) {
-        prefillIssueWithTemplate({ templateName, labels, titleTemplate });
-        chrome.runtime.onMessage.removeListener(listener);
-      }
-    });
-  };
-
   const optionsStyle = 'top: 34px; right: 0px';
 
   const issueTypes = [{
@@ -32,12 +22,14 @@ export default function addNewBuildoIssueButton() {
     icon: 'bug',
     className: 'buildo-new-bug-button',
     templateName: 'bug',
+    titleTemplate: {},
     labels: ['bug']
   }, {
     title: 'New defect',
     icon: 'alert',
     className: 'buildo-new-defect-button',
     templateName: 'defect',
+    titleTemplate: {},
     labels: ['defect']
   }, {
     title: 'New feature',
@@ -53,7 +45,7 @@ export default function addNewBuildoIssueButton() {
 
   const options = issueTypes.reduce((opts, { className, icon, title }) => `
     ${opts}
-    <a href="${newIssueURL}" class="select-menu-item js-navigation-item ${className}">
+    <a class="select-menu-item js-navigation-item ${className}">
       <div class="select-menu-item-text">
         <span class="octicon octicon-${icon}"></span>
         ${title}
@@ -62,7 +54,7 @@ export default function addNewBuildoIssueButton() {
   `, '');
 
   const newIssueOptions = $(`
-    <div style="${optionsStyle}" class="select-menu-modal-holder js-menu-content js-navigation-container js-active-navigation-container buildo-new-issue-button" aria-hidden="false">
+    <div style="${optionsStyle}" class="select-menu-modal-holder js-menu-content js-navigation-container js-active-navigation-container buildo-new-issue-options" aria-hidden="false">
       <div class="select-menu-modal" style="width: 200px">
         <div class="select-menu-list">${options}</div>
       </div>
@@ -70,6 +62,7 @@ export default function addNewBuildoIssueButton() {
   `);
 
   $('.buildo-new-issue-button').remove(); // remove buildo-button in case it already exists
+  $('.buildo-new-issue-options').remove(); // remove buildo-button in case it already exists
   newBuildoIssueButton.insertAfter(newIssueButton);
   newIssueOptions.insertAfter(newBuildoIssueButton);
 
@@ -77,18 +70,22 @@ export default function addNewBuildoIssueButton() {
 
   $('.buildo-new-issue-button').on('click', e => {
     newIssueOptions.toggle();
-    e.preventDefault();
     e.stopPropagation();
   });
 
-  $(document.body).on('click', () => newIssueOptions.hide());
+  $('.buildo-new-issue-options').on('click', e => e.stopPropagation());
+
+  $(document.body).on('click', () => $('.buildo-new-issue-options').hide());
   $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey }) => {
     if (keyCode === 67 && !shiftKey) {
-      bindIssueTemplates(issueTypes[2])();
       $(document.body).off('keydown.goToFeature');
+      $('.buildo-new-feature-button').click();
     }
   })
 
-  issueTypes.forEach( issue => $(`.${issue.className}`).on('click', bindIssueTemplates(issue)));
+  issueTypes.forEach(issue => $(`.${issue.className}`).on('click', () => {
+    const query = `?templateName=${issue.templateName}&labels=${[].concat(issue.labels).join(';')}&title=${issue.titleTemplate.title || ''}&titleSelection=${issue.titleTemplate.selection || ''}`;
+    window.location.href = `${newIssueURL}${query}`;
+  }));
 
 }

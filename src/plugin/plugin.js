@@ -7,12 +7,14 @@ import gatekeepMergeButton from './gatekeepMergeButton';
 import addNewBuildoIssueButton from './addNewBuildoIssueButton';
 import addSubIssueButton from './addSubIssueButton';
 import addMyMilestoneButton from './addMyMilestoneButton';
+import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
-chrome.runtime.onMessage.addListener(function({
+chrome.runtime.onMessage.addListener(({
   onIssuesPage,
   onIssuePage,
-  onPRPage
-}) {
+  onPRPage,
+  onNewIssuePage
+}) => {
 
   const isGithubLoading = !!$('.is-context-loading').length;
 
@@ -31,6 +33,10 @@ chrome.runtime.onMessage.addListener(function({
 
   if (onIssuePage) {
     addSubIssueButton();
+  }
+
+  if (onNewIssuePage) {
+    prefillIssueWithTemplate();
   }
 
   return true;

@@ -3,8 +3,7 @@ import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
 export default function addNewBuildoIssueButton({ oldInterface }) {
 
-  const newIssueButton = $('a.btn:contains(New issue)');
-  newIssueButton.removeClass('btn-primary');
+  const newIssueButton = $('a[href="/buildo/github-workflow-pal/issues/new"].btn:contains(New issue)');
 
   const newIssueURL = newIssueButton.prop('href');
 
@@ -70,13 +69,11 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
     </div>
   `);
 
-  $('.buildo-new-issue-button').remove();
-  if (isSmall) {
-    newBuildoIssueButton.insertAfter(newIssueButton);
-  } else {
-    newBuildoIssueButton.insertBefore(newIssueButton);
-  }
+  $('.buildo-new-issue-button').remove(); // remove buildo-button in case it already exists
+  newBuildoIssueButton.insertAfter(newIssueButton);
   newIssueOptions.insertAfter(newBuildoIssueButton);
+
+  newIssueButton.remove(); // remove default GitHub button
 
   if (oldInterface) {
     $('.right[role=search]').find('input[type=text]').css('width', '222px');

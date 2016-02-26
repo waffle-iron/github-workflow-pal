@@ -31,6 +31,17 @@ if (config.gzip) {
   }));
 }
 
+const preLoaders = config.eslint ? [
+  // linting with eslint
+  {
+    test: /\.jsx?$/, // test for both js and jsx
+    loader: 'eslint',
+    include: paths.SRC,
+    exclude: paths.ASSETS
+  }
+] : [];
+
+
 module.exports = _.extend({}, base, {
 
   entry: {
@@ -56,6 +67,7 @@ module.exports = _.extend({}, base, {
   plugins: base.plugins.concat(plugins),
 
   module: _.extend({}, base.module, {
+    preLoaders,
     loaders: base.module.loaders.concat([
       // babel transpiler
       {

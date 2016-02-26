@@ -6,6 +6,7 @@ import $ from 'jquery';
 import gatekeepMergeButton from './gatekeepMergeButton';
 import addNewBuildoIssueButton from './addNewBuildoIssueButton';
 import addSubIssueButton from './addSubIssueButton';
+import addMyMilestoneButton from './addMyMilestoneButton';
 
 chrome.runtime.onMessage.addListener(function({
   onIssuesPage,
@@ -24,7 +25,8 @@ chrome.runtime.onMessage.addListener(function({
   }
 
   if (onIssuesPage) {
-    addNewBuildoIssueButton({ oldInterface });
+    addNewBuildoIssueButton();
+    addMyMilestoneButton();
   }
 
   if (onIssuePage) {

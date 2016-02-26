@@ -8,10 +8,11 @@ export default function addMyMilestoneButton() {
   const milestonesButton = $('a[href="/buildo/github-workflow-pal/milestones"].subnav-item');
 
   const newMyMilestoneButton = $(`
-    <a href="${href}" class="js-selected-navigation-item subnav-item">
+    <a href="${href}" class="js-selected-navigation-item subnav-item my-milestone-button">
       My Milestone
     </a>
   `);
 
+  $('.my-milestone-button').remove();
   newMyMilestoneButton.insertAfter(milestonesButton);
 }

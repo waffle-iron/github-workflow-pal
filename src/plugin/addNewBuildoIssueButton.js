@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
-export default function addNewBuildoIssueButton({ oldInterface }) {
-
-  const newIssueButton = $('a[href="/buildo/github-workflow-pal/issues/new"].btn:contains(New issue)');
+export default function addNewBuildoIssueButton() {
+  const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
+  const newIssueButton = $(`a[href="${repoURL}/issues/new"].btn:contains(New issue)`);
 
   const newIssueURL = newIssueButton.prop('href');
 
@@ -74,10 +74,6 @@ export default function addNewBuildoIssueButton({ oldInterface }) {
   newIssueOptions.insertAfter(newBuildoIssueButton);
 
   newIssueButton.remove(); // remove default GitHub button
-
-  if (oldInterface) {
-    $('.right[role=search]').find('input[type=text]').css('width', '222px');
-  }
 
   newBuildoIssueButton.on('click', () => newIssueOptions.toggle());
 

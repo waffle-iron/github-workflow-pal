@@ -4,17 +4,6 @@ const paths = require('../paths');
 import { webpack as config } from '../config';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
-const preLoaders = config.eslint ? [
-  // linting with eslint
-  {
-    test: /\.jsx?$/, // test for both js and jsx
-    loader: 'eslint',
-    include: paths.SRC,
-    exclude: paths.ASSETS
-  }
-] : [];
-
 module.exports = {
   stats: {
     children: false
@@ -36,7 +25,6 @@ module.exports = {
   },
 
   module: {
-    preLoaders,
     resolve: {
       alias: {
         jquery: 'node_modules/jquery/src/jquery.js'

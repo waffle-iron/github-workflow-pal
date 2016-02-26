@@ -36,7 +36,8 @@
   "permissions": [
     "tabs",
     "webNavigation",
-    "https://github.com/buildo/*/pulls/*"
+    "https://github.com/buildo/*",
+    "https://github.omnilab.our.buildo.io/*"
   ],
   "update_url": "https://raw.githubusercontent.com/buildo/github-workflow-pal/master/package/update.xml"
 }

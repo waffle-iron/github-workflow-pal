@@ -75,8 +75,13 @@ export default function addNewBuildoIssueButton() {
 
   newIssueButton.remove(); // remove default GitHub button
 
-  newBuildoIssueButton.on('click', () => newIssueOptions.toggle());
+  $('.buildo-new-issue-button').on('click', e => {
+    newIssueOptions.toggle();
+    e.preventDefault();
+    e.stopPropagation();
+  });
 
+  $(document.body).on('click', () => newIssueOptions.hide());
   $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey }) => {
     if (keyCode === 67 && !shiftKey) {
       bindIssueTemplates(issueTypes[2])();

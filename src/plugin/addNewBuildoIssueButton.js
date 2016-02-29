@@ -77,8 +77,8 @@ export default function addNewBuildoIssueButton() {
   $('.buildo-new-issue-options').on('click', e => e.stopPropagation());
 
   $(document.body).on('click', () => $('.buildo-new-issue-options').hide());
-  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey }) => {
-    if (keyCode === 67 && !shiftKey) {
+  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey, altKey, ctrlKey, metaKey }) => {
+    if (keyCode === 67 && !shiftKey && !altKey && !ctrlKey && !metaKey) {
       $(document.body).off('keydown.goToFeature');
       $('.buildo-new-feature-button').click();
     }

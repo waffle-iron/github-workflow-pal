@@ -54,7 +54,7 @@ export default function addNewBuildoIssueButton() {
   `, '');
 
   const newIssueOptions = $(`
-    <div style="${optionsStyle}" class="select-menu-modal-holder js-menu-content js-navigation-container js-active-navigation-container buildo-new-issue-options" aria-hidden="false">
+    <div style="${optionsStyle}" class="select-menu-modal-holder js-menu-content js-navigation-container buildo-new-issue-options" aria-hidden="false">
       <div class="select-menu-modal" style="width: 200px">
         <div class="select-menu-list">${options}</div>
       </div>

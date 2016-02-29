@@ -77,7 +77,10 @@ export default function addNewBuildoIssueButton() {
   $('.buildo-new-issue-options').on('click', e => e.stopPropagation());
 
   $(document.body).on('click', () => $('.buildo-new-issue-options').hide());
-  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey, altKey, ctrlKey, metaKey }) => {
+  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey, altKey, ctrlKey, metaKey, target }) => {
+    if ($(target)[0] !== document.body) { // filter out events from inputs/textareas
+      return;
+    }
     if (keyCode === 67 && !shiftKey && !altKey && !ctrlKey && !metaKey) {
       $(document.body).off('keydown.goToFeature');
       $('.buildo-new-feature-button').click();

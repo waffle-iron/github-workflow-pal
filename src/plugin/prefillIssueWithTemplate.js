@@ -89,7 +89,7 @@ export default function prefillIssueWithTemplate() {
     setMilestone(milestone)
     enableActivePlaceholders(issueBody, issueTitle);
     issueTitle.click();
-    setTitle({ title, titleSelection });
+    setTitle({ title, selection: titleSelection });
 
   });
 

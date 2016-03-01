@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import prefillIssueWithTemplate from './prefillIssueWithTemplate';
 
 export default function addSubIssueButton() {
   const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
@@ -12,9 +11,14 @@ export default function addSubIssueButton() {
 
   const sideBar = $('#partial-discussion-sidebar');
   const milestone = $('.milestone-name').prop('title');
+  const parentIssueTitle = $('span.js-issue-title').text();
   const parentIssueNo = $('.gh-header-number').text().replace('#', '');
 
-  const query = `?templateName=sub-issue&labels=${labels.join(';')}&parentIssueNo=${parentIssueNo}&milestone=${milestone}`;
+  const [, topic] = parentIssueTitle.match(/(\[.+\]) /) || [];
+  const title = `${topic || '[{topic}]'} {title}`;
+  const titleSelection = topic ? '{title}' : '{topic}';
+
+  const query = `?templateName=sub-issue&labels=${labels.join(';')}&parentIssueNo=${parentIssueNo}&milestone=${milestone}&title=${title}&titleSelection=${titleSelection}`;
   const newSubIssueButton = $(`
     <a
       href="${newIssueURL}${query}"

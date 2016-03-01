@@ -74,8 +74,7 @@ export default function prefillIssueWithTemplate() {
 
     issueBody.prop('placeholder', 'Loading issue template...');
 
-    const { templateName, title, titleSelection, labels, templateVariables = {}, milestone } = parseQuery();
-
+    const { templateName, title, titleSelection, labels, milestone, ...templateVariables } = parseQuery();
     $.get(`${templatesPath}/${templateName}.md`, (contents, status) => {
       if (status == 'success') {
         issueBody.prop('placeholder', 'Ignoring the issue template, aren\'t you?!');

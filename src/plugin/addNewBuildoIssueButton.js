@@ -54,7 +54,7 @@ export default function addNewBuildoIssueButton() {
   `, '');
 
   const newIssueOptions = $(`
-    <div style="${optionsStyle}" class="select-menu-modal-holder js-menu-content js-navigation-container js-active-navigation-container buildo-new-issue-options" aria-hidden="false">
+    <div style="${optionsStyle}" class="select-menu-modal-holder js-menu-content js-navigation-container buildo-new-issue-options" aria-hidden="false">
       <div class="select-menu-modal" style="width: 200px">
         <div class="select-menu-list">${options}</div>
       </div>
@@ -77,8 +77,11 @@ export default function addNewBuildoIssueButton() {
   $('.buildo-new-issue-options').on('click', e => e.stopPropagation());
 
   $(document.body).on('click', () => $('.buildo-new-issue-options').hide());
-  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey }) => {
-    if (keyCode === 67 && !shiftKey) {
+  $(document.body).on('keydown.goToFeature', ({ keyCode, shiftKey, altKey, ctrlKey, metaKey, target }) => {
+    if ($(target)[0] !== document.body) { // filter out events from inputs/textareas
+      return;
+    }
+    if (keyCode === 67 && !shiftKey && !altKey && !ctrlKey && !metaKey) {
       $(document.body).off('keydown.goToFeature');
       $('.buildo-new-feature-button').click();
     }

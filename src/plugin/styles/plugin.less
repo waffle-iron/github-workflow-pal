@@ -7,3 +7,47 @@ input[type='checkbox'].buildo {
 span.buildo.octicon {
   margin-right: 4px;
 }
+
+.btn.buildo-gyazo-gif {
+  margin-bottom: 10px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  background-image: none;
+  background-color: #60b044;
+  color: white;
+  &.error {
+    background-color: #b33630;
+    &:hover {
+      background-color: #a32610;
+    }
+  }
+  &:hover {
+    background-color: #40a022;
+    background-image: none;
+  }
+}
+
+.btn.buildo-gyazo-gif-update-token, .btn.buido-gyazo-confirm-token  {
+  margin-bottom: 10px;
+  border-radius: 0 5px 5px 0;
+  border: none;
+  color: #60b044;
+  font-size: 22px;
+  border-radius: 0 5px 5px 0;
+  margin-bottom: 10px;
+}
+
+input[type="text"].buildo-gyazo-token-input {
+  min-height: 24px;
+  margin-bottom: 10px;
+  border-radius: 5px 0 0 5px;
+  margin-left: 10px;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: rgba(0,0,0,.55);
+  color: white;
+  font-weight: bold;
+  font-family: monospace;
+}

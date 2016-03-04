@@ -8,6 +8,7 @@ import addNewBuildoIssueButton from './addNewBuildoIssueButton';
 import addSubIssueButton from './addSubIssueButton';
 import addMyMilestoneButton from './addMyMilestoneButton';
 import prefillIssueWithTemplate from './prefillIssueWithTemplate';
+import addGyazoButton from './addGyazoButton';
 
 chrome.runtime.onMessage.addListener(({
   onIssuesPage,
@@ -33,6 +34,7 @@ chrome.runtime.onMessage.addListener(({
 
   if (onIssuePage) {
     addSubIssueButton();
+    addGyazoButton();
   }
 
   if (onNewIssuePage) {

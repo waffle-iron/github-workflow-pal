@@ -14,6 +14,8 @@ const INPUT_SEL = '.buildo-gyazo-token-input';
 const INPUT_CLASS = INPUT_SEL.slice(1);
 const CONFIRM_TOKEN_BTN_SEL = '.buido-gyazo-confirm-token';
 const CONFIRM_TOKEN_BTN_CLASS = CONFIRM_TOKEN_BTN_SEL.slice(1);
+const WRAPPER_SEL = '.buildo-gyazo-wrapper';
+const WRAPPER_CLASS = WRAPPER_SEL.slice(1);
 
 export default function addGyazoButton() {
 
@@ -30,6 +32,12 @@ export default function addGyazoButton() {
     addError({ $elem });
     setTimeout(function() { removeError({ $elem }) }, REMOVE_ERROR_TIMEOUT)
   };
+
+  $(WRAPPER_SEL).remove();
+
+  $(document).off('click.onGifBtnClick');
+  $(document).off('click.toggleSettingsClick');
+  $(document).off('click.onUpdateTokenBtnClick');
 
   const $gifButton = $('<div />')
     .text(GIF_BTN_LABEL)
@@ -53,6 +61,7 @@ export default function addGyazoButton() {
     .addClass(SETTINGS_BTN_CLASS);
 
   const $wrapper = $('<div />')
+    .addClass(WRAPPER_CLASS)
     .append($gifButton)
     .append($settingsBtn)
     .append($tokenInput)
@@ -88,8 +97,8 @@ export default function addGyazoButton() {
     toggleSettingsClick({ $elem: $(this) });
   };
 
-  $(document).on('click', GIF_BTN_SEL, onGifBtnClick);
-  $(document).on('click', SETTINGS_BTN_SEL, toggleSettingsClick);
-  $(document).on('click', CONFIRM_TOKEN_BTN_SEL, onUpdateTokenBtnClick)
+  $(document).on('click.onGifBtnClick', GIF_BTN_SEL, onGifBtnClick);
+  $(document).on('click.toggleSettingsClick', SETTINGS_BTN_SEL, toggleSettingsClick);
+  $(document).on('click.onUpdateTokenBtnClick', CONFIRM_TOKEN_BTN_SEL, onUpdateTokenBtnClick)
 
 }

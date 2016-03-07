@@ -24,6 +24,7 @@ chrome.runtime.onMessage.addListener(({
   }
 
   if (onPRPage) {
+    addGyazoButton();
     gatekeepMergeButton();
   }
 
@@ -38,6 +39,7 @@ chrome.runtime.onMessage.addListener(({
   }
 
   if (onNewIssuePage) {
+    addGyazoButton();
     prefillIssueWithTemplate();
   }
 

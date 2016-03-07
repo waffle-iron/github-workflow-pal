@@ -36,6 +36,7 @@
   "permissions": [
     "tabs",
     "webNavigation",
+    "storage",
     "https://github.com/buildo/*",
     "https://github.omnilab.our.buildo.io/*"
   ],

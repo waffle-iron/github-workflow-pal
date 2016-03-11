@@ -54,7 +54,7 @@ export default function addGyazoButton() {
           .fail(() => showError({ $elem }))
       );
 
-      const onGifBtnClick = () => addGIF({ access_token: accessToken, $elem: $(this) });
+      const onGifBtnClick = function() { addGIF({ access_token: accessToken, $elem: $(this) }); }
 
       $(document).on('click.onGifBtnClick', GIF_BTN_SEL, onGifBtnClick);
     }

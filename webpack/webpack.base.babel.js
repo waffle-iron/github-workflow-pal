@@ -14,9 +14,7 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new HtmlWebpackPlugin({
       filename: 'popup/index.html',
-      template: path.resolve(__dirname, '../templates/popup/index.html'),
-      inject: 'body',
-      chunks: ['popup']
+      template: path.resolve(paths.SRC, 'popup/index.html'),
     })
   ],
   externals: {

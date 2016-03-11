@@ -4,7 +4,7 @@ const GYAZO_API_URL = 'https://api.gyazo.com/api/images';
 const EDITOR_SEL = '.write-content'
 const TEXTAREA_SEL = '.comment-form-textarea';
 const REMOVE_ERROR_TIMEOUT = 3000;
-const GIF_BTN_LABEL = 'ADD GIF';
+const GIF_BTN_LABEL = 'GIF ⇧⌘V';
 const GIF_BTN_SEL = '.buildo-gyazo-gif';
 const GIF_BTN_CLASS = GIF_BTN_SEL.slice(1);
 const WRAPPER_SEL = '.buildo-gyazo-wrapper';
@@ -57,6 +57,21 @@ export default function addGyazoButton() {
       const onGifBtnClick = function() { addGIF({ access_token: accessToken, $elem: $(this) }); }
 
       $(document).on('click.onGifBtnClick', GIF_BTN_SEL, onGifBtnClick);
+
+      $(TEXTAREA_SEL).off('focus.textareaFocus');
+
+      $(TEXTAREA_SEL).on('focus.textareaFocus', function () {
+        const $closestButton = $(this).siblings(WRAPPER_SEL).find(GIF_BTN_SEL);
+        $(this).on('keydown.pasteGyazoImage', e => {
+          if (e.keyCode ===  86 && e.shiftKey && e.metaKey) {
+            e.preventDefault();
+            $closestButton.trigger('click.onGifBtnClick');
+          }
+        });
+        $(TEXTAREA_SEL).on('blur.textareaBlur', function() {
+          $(this).off('keydown.pasteGyazoImage');
+        })
+      });
     }
   });
 }

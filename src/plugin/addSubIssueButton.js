@@ -18,7 +18,7 @@ export default function addSubIssueButton() {
   const title = `${topic || '[{topic}]'} {title}`;
   const titleSelection = topic ? '{title}' : '{topic}';
 
-  const query = `?templateName=sub-issue&labels=${labels.join(';')}&parentIssueNo=${parentIssueNo}&milestone=${milestone}&title=${title}&titleSelection=${titleSelection}`;
+  const query = `?templateName=sub-issue&labels[]=${labels.join('&labels[]=')}&parentIssueNo=${parentIssueNo}&milestone=${milestone}&title=${title}&titleSelection=${titleSelection}`;
   const newSubIssueButton = $(`
     <a
       href="${newIssueURL}${query}"

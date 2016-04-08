@@ -41,6 +41,16 @@ export default function addNewBuildoIssueButton() {
       selection: '{topic}'
     },
     labels: []
+  }, {
+    title: 'New standard Issue',
+    icon: 'issue',
+    className: 'buildo-new-feature-button',
+    templateName: 'default',
+    titleTemplate: {
+      title: '[{topic}] {title}',
+      selection: '{topic}'
+    },
+    labels: []
   }];
 
   const options = issueTypes.reduce((opts, { className, icon, title }) => `

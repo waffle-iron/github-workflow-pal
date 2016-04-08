@@ -72,18 +72,19 @@ export default function prefillIssueWithTemplate() {
       issueTitleDOMElem.setSelectionRange(...subStringRange(title, selection));
     }
 
-    issueBody.prop('placeholder', 'Loading issue template...');
-
-    const { templateName, title, titleSelection, labels, milestone, ...templateVariables } = parseQuery();
-    $.get(`${templatesPath}/${templateName}.md`, (contents, status) => {
-      if (status == 'success') {
-        issueBody.prop('placeholder', 'Ignoring the issue template, aren\'t you?!');
-        const body = Object.keys(templateVariables).reduce((body, k) => body.replace(RegExp(`\\$${k}`, 'g'), templateVariables[k]), contents);
-        issueBody.val(body.trim());
-      } else {
-        issueBody.prop('placeholder', 'Couldn\'t fetch issue template. Sorry!');
-      }
-    });
+    const { template, templateName, title, titleSelection, labels, milestone, ...templateVariables } = parseQuery();
+    if (templateName !== 'default') {
+      issueBody.prop('placeholder', 'Loading issue template...');
+      $.get(`${templatesPath}/${templateName}.md`, (contents, status) => {
+        if (status == 'success') {
+          issueBody.prop('placeholder', 'Ignoring the issue template, aren\'t you?!');
+          const body = Object.keys(templateVariables).reduce((body, k) => body.replace(RegExp(`\\$${k}`, 'g'), templateVariables[k]), contents);
+          issueBody.val(body.trim());
+        } else {
+          issueBody.prop('placeholder', 'Couldn\'t fetch issue template. Sorry!');
+        }
+      });
+    }
 
     setLabels(labels);
     setMilestone(milestone)

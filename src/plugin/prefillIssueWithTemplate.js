@@ -35,23 +35,6 @@ export default function prefillIssueWithTemplate() {
     const labelsMenu = $('.label-select-menu > .js-menu-target');
     const milestoneMenu = $('[aria-label="Set milestone"]');
 
-    const setLabels = (labelNames) => {
-      if (labelNames) {
-        const selectLabels = (names) => {
-          names.forEach(name => $(`.select-menu-item:contains(${name})`).click());
-        };
-        labelsMenu.show();
-        document.arrive('.label-select-menu.active', {
-          fireOnAttributesModification: true,
-          onceOnly: true,
-          existing: true
-        }, () => {
-          selectLabels(labelNames);
-          labelsMenu.hide();
-        });
-      }
-    };
-
     const setMilestone = milestoneName => {
       const toggleMilestoneMenu = () => milestoneMenu.click();
       const selectMilestone = name => $(`.select-menu-item:contains(${name})`).click();
@@ -85,7 +68,6 @@ export default function prefillIssueWithTemplate() {
       }
     });
 
-    setLabels(labels);
     setMilestone(milestone)
     enableActivePlaceholders(issueBody, issueTitle);
     issueTitle.click();

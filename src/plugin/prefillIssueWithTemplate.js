@@ -32,7 +32,6 @@ export default function prefillIssueWithTemplate() {
     const templatesPath = 'https://rawgit.com/buildo/github-workflow-pal/master/templates';
     const issueTitle = $('.composer [name="issue[title]"]');
     const issueBody = $('.composer [name="issue[body]"]');
-    const labelsMenu = $('.label-select-menu > .js-menu-target');
     const milestoneMenu = $('[aria-label="Set milestone"]');
 
     const setMilestone = milestoneName => {

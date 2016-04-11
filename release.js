@@ -48,4 +48,4 @@ packingCrx(`${newVersion}`)
           .then(() => execThen(`git tag v${newVersion}`))
           .then(() => execThen('git push origin master --tags'))
       })
-  );
+  ).catch(err => console.log({ err }));

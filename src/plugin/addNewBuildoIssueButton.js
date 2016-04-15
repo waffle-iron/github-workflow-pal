@@ -44,7 +44,7 @@ export default function addNewBuildoIssueButton() {
   }, {
     title: 'New standard Issue',
     icon: 'issue',
-    className: 'buildo-new-feature-button',
+    className: 'buildo-new-standard-issue-button',
     templateName: 'default',
     titleTemplate: {
       title: '[{topic}] {title}',

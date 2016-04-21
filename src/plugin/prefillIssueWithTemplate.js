@@ -20,6 +20,11 @@ function parseQuery() {
   }, {});
 }
 
+function setSelection(issueTitle, { title = '', selection = '' }) {
+  const issueTitleDOMElem = issueTitle[0];
+  issueTitleDOMElem.setSelectionRange(...subStringRange(title, selection));
+}
+
 
 export default function prefillIssueWithTemplate() {
 
@@ -28,50 +33,14 @@ export default function prefillIssueWithTemplate() {
     onceOnly: true,
     existing: true
   }, () => {
+    const { title, titleSelection } = parseQuery();
 
-    const templatesPath = 'https://rawgit.com/buildo/github-workflow-pal/master/templates';
     const issueTitle = $('.composer [name="issue[title]"]');
     const issueBody = $('.composer [name="issue[body]"]');
-    const milestoneMenu = $('[aria-label="Set milestone"]');
 
-    const setMilestone = milestoneName => {
-      const toggleMilestoneMenu = () => milestoneMenu.click();
-      const selectMilestone = name => $(`.select-menu-item:contains(${name})`).click();
-      toggleMilestoneMenu();
-      document.arrive('[aria-label="Set milestone"] + .js-active-navigation-container', {
-        fireOnAttributesModification: true,
-        onceOnly: true,
-        existing: true
-      }, () => {
-        selectMilestone(milestoneName);
-        toggleMilestoneMenu();
-      });
-    }
-
-    const setTitle = ({ title = '', selection = '' }) => {
-      const issueTitleDOMElem = issueTitle[0];
-      issueTitle.val(title);
-      issueTitleDOMElem.setSelectionRange(...subStringRange(title, selection));
-    }
-
-    const { template, templateName, title, titleSelection, labels, milestone, ...templateVariables } = parseQuery();
-    if (templateName !== 'default') {
-      issueBody.prop('placeholder', 'Loading issue template...');
-      $.get(`${templatesPath}/${templateName}.md`, (contents, status) => {
-        if (status == 'success') {
-          issueBody.prop('placeholder', 'Ignoring the issue template, aren\'t you?!');
-          const body = Object.keys(templateVariables).reduce((body, k) => body.replace(RegExp(`\\$${k}`, 'g'), templateVariables[k]), contents);
-          issueBody.val(body.trim());
-        } else {
-          issueBody.prop('placeholder', 'Couldn\'t fetch issue template. Sorry!');
-        }
-      });
-    }
-
-    setMilestone(milestone)
     enableActivePlaceholders(issueBody, issueTitle);
     issueTitle.click();
-    setTitle({ title, selection: titleSelection });
+    setSelection(issueTitle, { title, selection: titleSelection });
 
   });
 

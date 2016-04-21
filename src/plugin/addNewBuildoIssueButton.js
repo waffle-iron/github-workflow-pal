@@ -21,36 +21,26 @@ export default function addNewBuildoIssueButton() {
     title: 'New bug',
     icon: 'bug',
     className: 'buildo-new-bug-button',
-    templateName: 'bug',
-    titleTemplate: {},
-    labels: ['bug']
+    templateURL: 'https://nemobot.our.buildo.io/templates?t=bug',
+    template: 'bug'
   }, {
     title: 'New defect',
     icon: 'alert',
     className: 'buildo-new-defect-button',
-    templateName: 'defect',
-    titleTemplate: {},
-    labels: ['defect']
+    templateURL: 'https://nemobot.our.buildo.io/templates?t=defect',
+    template: 'defect'
   }, {
     title: 'New feature',
     icon: 'paintcan',
     className: 'buildo-new-feature-button',
-    templateName: 'feature',
-    titleTemplate: {
-      title: '[{topic}] {title}',
-      selection: '{topic}'
-    },
-    labels: []
+    templateURL: 'https://nemobot.our.buildo.io/templates?t=feature',
+    template: 'feature'
   }, {
     title: 'New standard Issue',
     icon: 'issue',
     className: 'buildo-new-standard-issue-button',
-    templateName: 'default',
-    titleTemplate: {
-      title: '[{topic}] {title}',
-      selection: '{topic}'
-    },
-    labels: []
+    templateURL: 'https://nemobot.our.buildo.io/templates?t=standard',
+    template: 'standard'
   }];
 
   const options = issueTypes.reduce((opts, { className, icon, title }) => `
@@ -98,8 +88,9 @@ export default function addNewBuildoIssueButton() {
   })
 
   issueTypes.forEach(issue => $(`.${issue.className}`).on('click', () => {
-    const query = `?templateName=${issue.templateName}&labels=${[].concat(issue.labels).join(';')}&title=${issue.titleTemplate.title || ''}&titleSelection=${issue.titleTemplate.selection || ''}`;
-    window.location.href = `${newIssueURL}${query}`;
+    $.get(issue.templateURL, (res) => {
+      window.location.href = `${newIssueURL}?${res[issue.template].computedQuery}`;
+    });
   }));
 
 }

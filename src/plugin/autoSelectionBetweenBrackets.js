@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import querystring from 'query-string';
 import enableActivePlaceholders from './enableActivePlaceholders';
 require('arrive');
 
@@ -9,15 +10,6 @@ const subStringRange = (string, subString) => {
   }
   const endIndex = startIndex + subString.length;
   return [startIndex, endIndex];
-}
-
-function parseQuery() {
-  const queries = window.location.search.substr(1).split('&');
-  return queries.reduce((acc, query) => {
-    const key = decodeURIComponent(query.split('=')[0]);
-    const value = decodeURIComponent(query.split('=')[1]) || '';
-    return { ...acc, [key]: value };
-  }, {});
 }
 
 function setSelection(issueTitle, { title = '', selection = '' }) {
@@ -33,7 +25,7 @@ export default function prefillIssueWithTemplate() {
     onceOnly: true,
     existing: true
   }, () => {
-    const { title, titleSelection } = parseQuery();
+    const { title, titleSelection } = querystring.parse(window.location.search);
 
     const issueTitle = $('.composer [name="issue[title]"]');
     const issueBody = $('.composer [name="issue[body]"]');

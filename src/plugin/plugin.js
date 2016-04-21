@@ -7,7 +7,7 @@ import gatekeepMergeButton from './gatekeepMergeButton';
 import addNewBuildoIssueButton from './addNewBuildoIssueButton';
 import addSubIssueButton from './addSubIssueButton';
 import addMyMilestoneButton from './addMyMilestoneButton';
-import prefillIssueWithTemplate from './prefillIssueWithTemplate';
+import autoSelectionBetweenBrackets from './autoSelectionBetweenBrackets';
 import addGyazoButton from './addGyazoButton';
 
 chrome.runtime.onMessage.addListener(({
@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener(({
 
   if (onNewIssuePage) {
     addGyazoButton();
-    prefillIssueWithTemplate();
+    autoSelectionBetweenBrackets();
   }
 
   return true;

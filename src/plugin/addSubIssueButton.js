@@ -1,27 +1,14 @@
 import $ from 'jquery';
+import querystring from 'query-string';
 
 export default function addSubIssueButton() {
   const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
   const newIssueURL = `${repoURL}/issues/new`;
 
-  const labels = $('.labels.css-truncate > a')
-    .toArray()
-    .map(x => x.innerHTML)
-    .filter(x => x !== 'macro');
-
   const sideBar = $('#partial-discussion-sidebar');
-  const milestone = $('.milestone-name').prop('title');
-  const parentIssueTitle = $('span.js-issue-title').text();
-  const parentIssueNo = $('.gh-header-number').text().replace('#', '');
 
-  const [, topic] = parentIssueTitle.match(/(\[.+\]) /) || [];
-  const title = `${topic || '[{topic}]'} {title}`;
-  const titleSelection = topic ? '{title}' : '{topic}';
-
-  const query = `?templateName=sub-issue&labels[]=${labels.join('&labels[]=')}&parentIssueNo=${parentIssueNo}&milestone=${milestone}&title=${title}&titleSelection=${titleSelection}`;
   const newSubIssueButton = $(`
     <a
-      href="${newIssueURL}${query}"
       class="btn btn-sm buildo-new-sub-issue-button"
       style="margin-top: 20px; width: 100%; text-align: center;"
     >
@@ -32,4 +19,28 @@ export default function addSubIssueButton() {
 
   $('.buildo-new-sub-issue-button').remove();
   sideBar.append(newSubIssueButton);
+
+  $('.buildo-new-sub-issue-button').on('click', () => {
+    const parentIssueTitle = $('span.js-issue-title').text();
+
+    const [, topic] = parentIssueTitle.match(/\[(.+)\] /) || [];
+    const milestone = $('.milestone-name').prop('title');
+    const parentIssueNumber = $('.gh-header-number').text().replace('#', '');
+    const labels = $('.labels.css-truncate > a')
+      .toArray()
+      .map(x => x.innerHTML)
+      .filter(x => x !== 'macro');
+
+    const query = {
+      milestone,
+      labels,
+      parentIssueNumber,
+      topic,
+      t: 'subIssue'
+    };
+    const url = `https://nemobot.our.buildo.io/templates?${querystring.stringify(query)}`;
+    $.get(url, (res) => {
+      window.location.href = `${newIssueURL}?${res.subIssue.computedQuery}`;
+    });
+  });
 }

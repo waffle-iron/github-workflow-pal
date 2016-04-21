@@ -6,7 +6,8 @@
   "dependencies": {
     "arrive": "^2.3.0",
     "jquery": "^1.11.3",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "query-string": "^4.1.0"
   },
   "devDependencies": {
     "argparse": "^1.0.3",

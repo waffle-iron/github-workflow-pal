@@ -1,15 +1,10 @@
 # GitHub Workflow Pal
-A friendly chrome extension that helps you following the buildo's GitHub workflow
+A friendly Chrome extension that helps you following the buildo's GitHub workflow
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/chkjadbenkogbdkdjeckjfbbnjpmbelm.svg?maxAge=2592000)](https://chrome.google.com/webstore/detail/buildos-github-workflow-e/chkjadbenkogbdkdjeckjfbbnjpmbelm)
 
-
-### Install
-- Download [here](https://github.com/buildo/github-workflow-pal/releases/latest)
-- Navigate to `chrome://extensions`
-- Drag & Drop the extension on the extension list
-
-### Update
-- the extension auto-updates
+### Installation
+Install from the [Chrome Web Store](https://chrome.google.com/webstore/detail/buildos-github-workflow-e/chkjadbenkogbdkdjeckjfbbnjpmbelm)
 
 ### Features
 

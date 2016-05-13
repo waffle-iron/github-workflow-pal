@@ -29,7 +29,7 @@ export default function addSubIssueButton() {
     const labels = $('.labels.css-truncate > a')
       .toArray()
       .map(x => x.innerHTML)
-      .filter(x => x !== 'macro');
+      .filter(x => x !== 'macro' && x !== 'customers');
 
     const query = {
       milestone,

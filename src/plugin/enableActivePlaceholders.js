@@ -39,11 +39,11 @@ export default function enableActivePlaceholders(...elements) {
     const ib = el.val();
     const beforeCursor = ib.substr(0, position);
     const afterCursor = ib.substr(position);
-    const afterStartBracket = beforeCursor.match(/\{[^\}]*$/);
-    const beforeEndBracket = afterCursor.match(/^[^\{]*\}/);
-    if (afterStartBracket && beforeEndBracket) {
-      const selectFrom = position - afterStartBracket[0].length;
-      const selectTo = position + beforeEndBracket[0].length;
+    const afterStartQuote = beforeCursor.match(/> [^\n]*$/);
+    const beforeEndQuote = afterCursor.match(/^\n\n/);
+    if (afterStartQuote && beforeEndQuote) {
+      const selectFrom = position - afterStartQuote[0].length;
+      const selectTo = position + beforeEndQuote[0].length;
       el.selectRange(selectFrom, selectTo);
     }
   }));

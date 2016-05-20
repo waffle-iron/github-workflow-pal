@@ -1,8 +1,10 @@
 import $ from 'jquery';
 import querystring from 'query-string';
+import { last } from 'lodash';
 
 export default function addSubIssueButton() {
   const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
+  const projectName = last(repoURL.split('/'));
   const newIssueURL = `${repoURL}/issues/new`;
 
   const sideBar = $('#partial-discussion-sidebar');
@@ -32,6 +34,7 @@ export default function addSubIssueButton() {
       .filter(x => x !== 'macro' && x !== 'customers');
 
     const query = {
+      project: projectName,
       milestone,
       labels,
       parentIssueNumber,

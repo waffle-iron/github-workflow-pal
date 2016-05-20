@@ -1,7 +1,9 @@
 import $ from 'jquery';
+import { last } from 'lodash';
 
 export default function addNewBuildoIssueButton() {
   const [, repoURL] = window.location.href.match(/.*(\/buildo\/[^\/]+)/);
+  const projectName = last(repoURL.split('/'));
   const newIssueButton = $(`a[href="${repoURL}/issues/new"].btn:contains(New issue)`);
 
   const newIssueURL = `${repoURL}/issues/new`;
@@ -21,25 +23,25 @@ export default function addNewBuildoIssueButton() {
     title: 'New bug',
     icon: 'bug',
     className: 'buildo-new-bug-button',
-    templateURL: 'https://nemobot.our.buildo.io/templates?t=bug',
+    templateURL: `https://nemobot.our.buildo.io/templates?t=bug&project=${projectName}`,
     template: 'bug'
   }, {
     title: 'New defect',
     icon: 'alert',
     className: 'buildo-new-defect-button',
-    templateURL: 'https://nemobot.our.buildo.io/templates?t=defect',
+    templateURL: `https://nemobot.our.buildo.io/templates?t=defect&project=${projectName}`,
     template: 'defect'
   }, {
     title: 'New feature',
     icon: 'paintcan',
     className: 'buildo-new-feature-button',
-    templateURL: 'https://nemobot.our.buildo.io/templates?t=feature',
+    templateURL: `https://nemobot.our.buildo.io/templates?t=feature&project=${projectName}`,
     template: 'feature'
   }, {
     title: 'New standard Issue',
     icon: 'issue',
     className: 'buildo-new-standard-issue-button',
-    templateURL: 'https://nemobot.our.buildo.io/templates?t=standard',
+    templateURL: `https://nemobot.our.buildo.io/templates?t=standard&project=${projectName}`,
     template: 'standard'
   }];
 

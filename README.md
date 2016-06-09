@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/buildo/github-workflow-pal.png?label=ready&title=Ready)](https://waffle.io/buildo/github-workflow-pal)
 # GitHub Workflow Pal
 A friendly Chrome extension that helps you following the buildo's GitHub workflow
 

@@ -9,6 +9,7 @@ import addSubIssueButton from './addSubIssueButton';
 import addMyMilestoneButton from './addMyMilestoneButton';
 import autoSelectionBetweenBrackets from './autoSelectionBetweenBrackets';
 import addGyazoButton from './addGyazoButton';
+import addElephantReminderButton from './addElephantReminderButton';
 
 chrome.runtime.onMessage.addListener(({
   onIssuesPage,
@@ -26,6 +27,7 @@ chrome.runtime.onMessage.addListener(({
   if (onPRPage) {
     addGyazoButton();
     gatekeepMergeButton();
+    addElephantReminderButton();
   }
 
   if (onIssuesPage) {
@@ -36,6 +38,7 @@ chrome.runtime.onMessage.addListener(({
   if (onIssuePage) {
     addSubIssueButton();
     addGyazoButton();
+    addElephantReminderButton();
   }
 
   if (onNewIssuePage) {

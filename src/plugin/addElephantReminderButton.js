@@ -94,9 +94,9 @@ export default function addElephantReminderButton() {
     $(DATEINPUT_SEL).remove();
     $(TEXT_SEL).remove();
     const onEnter = () => addReminder({ ...params, date: $dateInput.val(), type: 'always' });
-    sideBar.prepend($reminderButton)
-    sideBar.prepend($dateInput);
-    sideBar.prepend($text);
+    sideBar.append($text);
+    sideBar.append($dateInput);
+    sideBar.append($reminderButton);
     $dateInput.addClass(DATEINPUT_CLASS);
     $text.addClass(TEXT_CLASS).text(`I'll remind you to check this thread`);
     $reminderButton.removeClass('btn-primary disabled').addClass(BUTTON_CLASS).text('🐘 Remind me!');
